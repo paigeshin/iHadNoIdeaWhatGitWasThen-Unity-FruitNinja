@@ -45,20 +45,33 @@ public class LineCreator : MonoBehaviour
 
             line.SetPosition(vertexCount, mousePos); //move the position of the line, according to the position of the mouse.
             vertexCount++;
+
             //Whenever the mouse is down, we will create the line and increment lines 
             //and we are moving the position of the line according to the position of our mouse.
 
+            //Attach Box Collider to our line
+            BoxCollider2D box = gameObject.AddComponent<BoxCollider2D>(); //add box collider 2d
+            box.transform.position = line.transform.position; //change the position of the box collider to the position of the line.
+            box.size = new Vector2(0.1f, 0.1f); //just change the size.
+          
         }
 
         //we need to delete this mouse position and the line when the mouse button goes up.
         if (Input.GetMouseButtonUp(0))
         {
+            //Explanation about the method 'Input.GetMouseButtonUp(0)'. Which means mouse is unclicked.
             mouseDown = false;
             vertexCount = 0;
 
             //line.SetVertexCount(0);
             line.positionCount = 0; //Remove all the lines.
-            
+
+            //Once BoxCollider is created, we need to destroy it.
+            BoxCollider2D[] colliders = GetComponents<BoxCollider2D>(); //this array will store all 'BoxCollider2D' 
+            foreach(BoxCollider2D box in colliders)
+            {
+                Destroy(box); //Destroy them all!
+            }
         }
     }
 }
