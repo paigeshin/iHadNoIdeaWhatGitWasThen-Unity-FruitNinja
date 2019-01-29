@@ -60,6 +60,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\FruitSpawner.cs" />
     <Compile Include="Assets\Scripts\LineCreator.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/grosso/Desktop/unity/FruitNinja/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
