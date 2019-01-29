@@ -78,7 +78,8 @@ public class LineCreator : MonoBehaviour
             }
         }
 
-        else if(Application.platform == RuntimePlatform.WindowsPlayer) { 
+        //else if(Application.platform == RuntimePlatform.WindowsPlayer) { 
+        else { 
 
             if (Input.GetMouseButtonDown(0))
             {
