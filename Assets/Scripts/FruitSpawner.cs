@@ -7,6 +7,8 @@ public class FruitSpawner : MonoBehaviour
     public GameObject fruit;
     public float maxX; //it limits Fruit's maximum movement
 
+    public GameObject bomb;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +37,12 @@ public class FruitSpawner : MonoBehaviour
     public void SpawnFruitGroups()
     {
         StartCoroutine("SpawnFruit"); //I guess if we wanna start a method which returns 'WaitForSeconds', we might need to call this function to get it started.
+
+        //Spawn Bombs
+        if (Random.Range(0, 6) > 2)
+        {
+            SpawnBomb();
+        }
     }
 
     IEnumerator SpawnFruit()
@@ -52,6 +60,20 @@ public class FruitSpawner : MonoBehaviour
 
             yield return new WaitForSeconds(0.5f);
         }
+    }
+
+    //SpawnBomb, added lately 
+    void SpawnBomb()
+    {
+        float Rand = Random.Range(-maxX, maxX); //create random position according to 'maxX' value.
+        Vector3 pos = new Vector3(Rand, transform.position.y, 0);
+        GameObject b = Instantiate(bomb, pos, Quaternion.identity) as GameObject; //p1 - object to create, p2 - position, p3 - rotation
+
+        //by using RigidBody attached in Inspector, we will add force.
+        b.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, 35f), ForceMode2D.Impulse);//if we add Impulse, it's gonna move faster and faster
+
+        //add Rotation 
+        b.GetComponent<Rigidbody2D>().AddTorque(Random.Range(-50f, 50f));
     }
 
 }

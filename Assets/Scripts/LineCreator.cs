@@ -7,6 +7,7 @@ public class LineCreator : MonoBehaviour
     int vertexCount = 0; //It simply counts how many vertexs are in the line.
     bool mouseDown = false; //This will detect whenever we click on the mouse.
     LineRenderer line; //Get reference from Component.(Get access to 'LineRenderer' Component)
+    public GameObject blast;
 
     void Awake()
     {
@@ -131,4 +132,18 @@ public class LineCreator : MonoBehaviour
         }
 
     }
+
+    //if line touches bomb
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.gameObject.tag == "Bomb")
+        {
+            //bome explodes
+            GameObject b = Instantiate(blast, col.transform.position, Quaternion.identity) as GameObject;
+            Destroy(b.gameObject, 5f); //blast object appears
+
+            Destroy(col.gameObject); //anything that collides with the bomb (i mean 'line') will be destroyed 
+        }
+    }
+
 }
